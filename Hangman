@@ -1,0 +1,139 @@
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+from word_lists import get_hangman_words
+from collections import Counter
+
+# Function to calculate letter frequency in the word list
+def calculate_letter_frequency(word_list):
+    all_letters = "".join(word_list)  # Concatenating all the words
+    letter_counts = Counter(all_letters)  # Count frequency of each letter
+    total_letters = sum(letter_counts.values())  # Calculate total number of letters
+    
+    # Calculate letter frequencies and sort them
+    letter_frequency = {k: v / total_letters for k, v in sorted(letter_counts.items(), key=lambda item: item[1], reverse=True)}
+    
+    return letter_frequency
+
+# Function to decide the next action (guessing a letter) based on the current state and epsilon-greedy strategy
+def choose_action(state, letter_frequency, epsilon=0.1):
+    if state in Q_table and np.random.rand() > epsilon:
+        max_q_value = max(Q_table[state].values())
+        max_actions = [action for action, q_value in Q_table[state].items() if q_value == max_q_value]
+        
+        # Using letter frequency as a tie-breaker
+        return max(max_actions, key=lambda action: letter_frequency.get(action, 0))
+    else:
+        return random.choice("abcdefghijklmnopqrstuvwxyz")  # Random choice otherwise
+
+# Initialize Q-table
+Q_table = {}
+
+# Function to update the Q-table based on Q-learning algorithm
+def update_Q_table(state, action, reward, new_state, alpha=0.1, gamma=0.9):
+    if state not in Q_table:
+        Q_table[state] = {}
+    if action not in Q_table[state]:
+        Q_table[state][action] = 0
+
+    max_future_Q = max(Q_table[new_state].values()) if new_state in Q_table else 0
+    current_Q = Q_table[state][action]
+
+    Q_table[state][action] = (1 - alpha) * current_Q + alpha * (reward + gamma * max_future_Q)
+
+# Hangman game logic
+def hangman(word, letter_frequency):
+    state = "_" * len(word)  # Initial state with underscores
+    attempts_left = 6  # Number of attempts left
+    history = []  # Store actions history
+
+    while attempts_left > 0 and "_" in state:
+        action = choose_action(state, letter_frequency)  # Choose next letter to guess
+        
+        new_state = state  # Initialize new state to be same as old state initially
+
+        # If chosen letter is in the word, reveal it
+        if action in word:
+            for i, c in enumerate(word):
+                if c == action:
+                    new_state = new_state[:i] + c + new_state[i+1:]
+        
+        else:  # Otherwise, reduce attempts
+            attempts_left -= 1
+
+        reward = 1 if "_" not in new_state else -1  # Set reward based on the new state
+        update_Q_table(state, action, reward, new_state)  # Update Q-table
+
+        state = new_state  # Set new state as the current state
+        history.append(action)  # Add action to history
+
+    return state, history  # Return final state and action history
+
+# Function to train the model over multiple epochs
+def train_model(word_list, letter_frequency, epochs=5):
+    for _ in range(epochs):
+        for word in word_list:
+            hangman(word, letter_frequency)
+
+# Function to evaluate the model's performance
+def evaluate_model(word_list, letter_frequency):
+    win_count = 0  # Number of games won
+    total_games = len(word_list)  # Total number of games
+    
+    for word in word_list:
+        result, _ = hangman(word, letter_frequency)
+        if "_" not in result:  # A win
+            win_count += 1
+            
+    return win_count / total_games  # Return win ratio
+
+# Main function to run the experiment
+def run_experiment(runs=200000):
+    word_list = get_hangman_words()  # Get the list of words
+    letter_frequency = calculate_letter_frequency(word_list)  # Calculate letter frequencies
+
+    # Shuffle word list and split into training and test sets (80/20)
+    random.shuffle(word_list)
+    split_index = int(len(word_list) * 0.85)
+    train_words = word_list[:split_index]
+    test_words = word_list[split_index:]
+
+    win_ratios = []  # To store win ratios for each run
+
+    # Run the experiment multiple times
+    for i in range(runs):
+        print(f"Run {i + 1}: Training...")
+        train_model(train_words, letter_frequency)
+        
+        print(f"Run {i + 1}: Evaluating...")
+        win_ratio = evaluate_model(test_words, letter_frequency)
+        win_ratios.append(win_ratio)
+        
+        print(f"Win ratio for run {i + 1}: {win_ratio}")
+    
+    # Plotting the raw win ratios
+    plt.figure(figsize=(10, 6))
+    plt.subplot(2, 1, 1)  # 2 rows, 1 column, first plot
+    plt.plot(win_ratios)
+    plt.xlabel('Run Number')
+    plt.ylabel('Win Ratio')
+    plt.title('Raw Win Ratio Over Time')
+
+    # Calculating the moving average for every 1000 runs
+    window_size = 1000
+    smoothed_win_ratios = np.convolve(win_ratios, np.ones(window_size)/window_size, mode='valid')
+    
+    # Plotting the smoothed win ratios
+    plt.subplot(2, 1, 2)  # 2 rows, 1 column, second plot
+    plt.plot(range(0, len(win_ratios) - window_size + 1, window_size), smoothed_win_ratios[::window_size])
+    plt.xlabel('Run Number')
+    plt.ylabel('Smoothed Win Ratio')
+    plt.title(f'Smoothed Win Ratio Over Time (Window Size: {window_size})')
+
+    plt.tight_layout()
+    plt.show()
+
+# Runing the experiment
+word_list = get_hangman_words()
+letter_frequency = calculate_letter_frequency(word_list)
+run_experiment()
