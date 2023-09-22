@@ -53,25 +53,92 @@ def get_hangman_words():
         "single", "chance", "theory", "within", "window", "answer", "increase", 
         "farmer", "leader", "remain", "system", "success", "season", "purpose", 
         "either", "recent", "reflect", "discuss", "agreed", "method", "beyond", 
-        "happen", "animal", "factor", "decide", "indeed", "inside", "nearly", "energy"]
+        "happen", "animal", "factor", "decide", "indeed", "inside", "nearly", 
+        "energy", "create", "amount", "change", "follow", "parent", "impact", "source", "charge", "corner",
+        "record", "summer", "police", "either", "remain", "modern", "budget", "treaty", "gender",
+        "debate", "animal", "factor", "object", "attack", "victim", "writer", "client", "extend",
+        "relief", "oppose", "status", "survey", "policy", "series", "ruling", "entire", "sample",
+        "define", "safety", "estate", "singer", "remove", "return", "thanks", "reduce", "visual",
+        "focus", "wealth", "solely", "discus", "affair", "scheme", "union", "cycle", "whole",
+        "grant", "daily", "theory", "option", "listen", "friend", "demand", "search", "marker",
+        "employ", "source", "aspect", "impact", "obtain", "notion", "access", "credit", "nature",
+        "aspect", "stress", "finish", "resolve", "unique", "target", "signal", "relate", "select",
+        "gather", "manage", "derive", "proven", "mostly", "advise", "reveal", "random", "couple",
+        "always", "switch", "charge", "expose", "giving", "player", "easier", "enrich", "mobile",
+        "activity", "approach", "business", "campaign", "complete", "describe", "determine",
+        "economic", "evidence", "generate", "hospital", "identify", "increase", "indicate",
+        "industry", "interest", "involved", "military", "personal", "physical", "planning",
+        "position", "positive", "practice", "pressure", "previous", "problems", "progress",
+        "purchase", "question", "research", "resource", "response", "security", "sentence",
+        "specific", "standard", "strategy", "strength", "supplies", "thoughts", "thousand",
+        "together", "training", "violence", "whatever", "wildlife", "analysis", "argument",
+        "awareness", "beneficial", "capacity", "cultural", "disaster", "function", "graphics",
+        "hardware", "instance", "judgment", "language", "medicine", "numerous", "operator",
+        "priority", "rational", "relevant", "reliable", "sentence", "struggle", "survival",
+        "thinking", "ultimate", "variable", "building", "criteria", "database", "domestic",
+        "feedback", "guidance", "incident", "location", "magnitude", "narrative", "overcome",
+        "paradigm", "regional", "scenario", "teaching", "temporal", "academic", "accurate",
+        "boundary", "commodity", "consumer", "contrast", "critical", "currency", "equation",
+        "freedom", "passage", "justice", "ethical", "respect", "journey", "wisdom", "reality",
+        "courage", "inspire", "qualify", "discuss", "compose", "fitness", "finance", "proceed",
+        "explore", "convert", "kingdom", "provoke", "sustain", "chamber", "isolate", "fulfill",
+        "empower", "refresh", "tension", "liberty", "diverse", "inquire", "perform", "predict",
+        "acquire", "absolve", "achieve", "decline", "dismiss", "endure", "safety", "secure",
+        "enable", "engage", "enrich", "deploy", "derive", "scheme", "evoke", "orient", "emerge",
+        "permit", "expose", "purify", "refine", "verify", "reject", "invoke", "retain", "impose",
+        "inform", "assert", "clarify", "compare", "combat", "empire", "excuse", "output", "renew",
+        "rescue", "revive", "unveil", "utilize", "subdue", "unfold", "uphold", "attend", "awake",
+        "unfold", "withstand", "approve", "arrive", "assist", "assume", "assure", "attract",
+        "augment", "bewild", "comply", "concur", "defer", "denote", "deploy", "derive", "detect",
+        "devote", "differ", "disarm", "equate", "induce", "invoke", "launch", "omit", "persist",
+        "prosper", "pursue", "revoke", "unite", "uplift", "vex", "yearn", "allure", "beseech",
+        "bestow", "bewail", "blight", "blithe", "boast", "baffle", "chide", "clasp", "cling",
+        "coax", "crave", "deplore", "despise", "dread", "entreat", "fawn", "flee", "gloat", "grieve",
+        "grasp", "inquire", "lament", "loathe", "mourn", "recoil", "shun", "snub", "spurn", "wail",
+        "believe", "examine", "insight", "neutral", "pioneer", "prosper", "recruit", "venture",
+        "afflict", "compile", "endorse", "foresee", "inhabit", "nourish", "outlive", "persist",
+        "project", "restore", "sustain", "traverse", "balance", "compose", "disclose", "enforce",
+        "fracture", "insulate", "obstruct", "override", "persist", "reclaim", "repress", "suspend",
+        "transmit", "acclaim", "blossom", "consume", "divulge", "execute", "generate", "involve",
+        "occupy", "pollute", "rebuild", "resolve", "seclude", "swindle", "uncover", "appease",
+        "clarify", "conflict", "distort", "exclude", "forfeit", "inhibit", "neglect", "oppress",
+        "provoke", "redeem", "refrain", "suppress", "thrive", "withhold", "advocate", "betray",
+        "condemn", "disrupt", "elude", "forsake", "hinder", "migrate", "obscure", "prohibit",
+        "revoke", "sabotage", "tamper", "thwart", "withdraw", "coexist", "conform", "deceive",
+        "delight", "endure", "enhance", "fulfill", "harvest", "maintain", "overcome", "prevail",
+        "restrain", "scarcity", "treasure", "undermine", "convince", "decorate", "embrace",
+        "fascinate", "illumine", "manifest", "overwhelm", "perceive", "reverber", "simulate",
+        "tolerate", "acknowledge", "alienate", "cultivate", "dominate", "enlighten", "flourish",
+        "integrate", "liberate", "orchestrate", "perpetuate", "radiate", "reconcile", "subjugate",
+        "achieve", "adapt", "adjust", "advise", "analyze", "assure", "attract", "benefit", "compose",
+        "concede", "condone", "console", "construct", "consume", "contribute", "convict", "debate",
+        "decide", "deduct", "defer", "define", "defy", "deliver", "demand", "deny", "depict",
+        "derive", "design", "detect", "deter", "determine", "devise", "dictate", "differ", "diminish",
+        "discern", "dispute", "dissolve", "distill", "divert", "divulge", "dominate", "donate",
+        "doubt", "draft", "dwell", "earn", "eject", "elapse", "elicit", "embody", "embrace", "emit",
+        "enable", "enact", "endure", "enforce", "engage", "enhance", "enlist", "enroll", "entail",
+        "entice", "equal", "equip", "erode", "evade", "evoke", "evolve", "exceed", "exclude",
+        "exert", "exhibit", "exist", "expand", "expect", "expel", "expire", "explain", "explore",
+        "export", "expose", "extract", "fathom", "favor", "fear", "feel", "fend", "fetch", "find",
+        "flaunt", "flee", "flinch", "flock", "flow", "fluctuate", "foil", "forbid", "force",
+        "forecast", "forge", "form", "foster", "found", "gain", "gather", "gauge", "generate",
+        "govern", "grant", "greet", "grow", "halt", "handle", "happen", "harbor", "harm", "hatch",
+        "haunt", "head", "heal", "heap", "hear", "heat", "help", "hide", "highlight", "hinder",
+        "hint", "hire", "hoard", "hold", "hone", "hook", "hope", "hover", "hunt", "hurry"]
 
-    return word_list
+    unique_set = set()
+    unique_list = []
+    duplicates = []
 
+    for item in word_list:
+        if item not in unique_set:
+            unique_set.add(item)
+            unique_list.append(item)
+        else:
+            duplicates.append(item)
 
-'''
-# Helper snippet for finding duplicate words
-my_list = []
-unique_set = set()
-unique_list = []
-duplicates = []
+    #print(f"Duplicates: {duplicates}")
+    #print(f"Unique list: {unique_list}")
 
-for item in my_list:
-    if item not in unique_set:
-        unique_set.add(item)
-        unique_list.append(item)
-    else:
-        duplicates.append(item)
+    return unique_list
 
-print(f"Duplicates: {duplicates}")
-print(f"Unique list: {unique_list}")
-'''
