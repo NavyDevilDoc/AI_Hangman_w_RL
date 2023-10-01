@@ -14,3 +14,13 @@ My initial solution design was to employ Q-Learning and once I got through the i
 moments, I got to a point where I saw actual training happening. At some point, I dug into Deep-Q Networks but
 ultimately went away from that because I wasn't quite following what was going on, and if I can't explain it to
 myself, I can't explain it to anyone else. 
+
+
+UPDATE:
+The DQN experiment was interesting but in the end, my computer couldn't keep up with the amount of memory needed
+to fully realize a true result, as Spyder would throw a fatal error and reset the environment entirely. After some
+tinkering and really learning how to build effective classes, which is new for me, I settled on the script you all see
+here. There's plenty of room for improvement, mind you, as my test word win percentage got to 60% and that was it. 
+I'd really like to beef up the word list, but I just don't have time. 
+
+Take it and run, folks. Improve it however you see fit!
